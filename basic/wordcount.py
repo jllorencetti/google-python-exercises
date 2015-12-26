@@ -38,6 +38,9 @@ print_words() and print_top().
 """
 
 import sys
+import re
+from operator import itemgetter
+from collections import Counter
 
 
 # +++your code here+++
@@ -45,8 +48,34 @@ import sys
 # You could write a helper utility function that reads a file
 # and builds and returns a word/count dict for it.
 # Then print_words() and print_top() can just call the utility function.
+def count_words(filename):
+    with open(filename) as f:
+        text = f.read()
 
-###
+    words = re.findall(r'\w+', text.lower())
+
+    cnt = Counter()
+    for word in words:
+        cnt[word] += 1
+
+    return cnt
+
+
+def print_words(filename):
+    words = count_words(filename)
+    sorted_words = sorted(words.items(), key=itemgetter(0))
+
+    for count in sorted_words:
+        print(count[0], count[1])
+
+
+def print_top(filename):
+    words = count_words(filename)
+    top_words = words.most_common(20)
+
+    for count in top_words:
+        print(count[0], count[1])
+
 
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
