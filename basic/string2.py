@@ -20,12 +20,11 @@ import math
 # Return the resulting string.
 def verbing(s):
     if len(s) >= 3:
-        if s[-3:] == 'ing':
-            return s + 'ly'
+        if s.endswith('ing'):
+            s += 'ly'
         else:
-            return s + 'ing'
-    else:
-        return s
+            s += 'ing'
+    return s
 
 
 # E. not_bad
