@@ -14,7 +14,16 @@
 # so [1, 2, 2, 3] returns [1, 2, 3]. You may create a new list or
 # modify the passed in list.
 def remove_adjacent(nums):
-    return list(set(nums))
+    if not nums:
+        return []
+
+    l = [nums[0]]
+
+    for n in nums[1:]:
+        if n != l[-1]:
+            l.append(n)
+
+    return l
 
 
 # E. Given two lists sorted in increasing order, create and return a merged
@@ -64,6 +73,7 @@ def main():
     test(remove_adjacent([1, 2, 2, 3]), [1, 2, 3])
     test(remove_adjacent([2, 2, 3, 3, 3]), [2, 3])
     test(remove_adjacent([]), [])
+    test(remove_adjacent([1, 2, 2, 3, 3, 2, 2]), [1, 2, 3, 2])
 
     print()
     print('linear_merge')
