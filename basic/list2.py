@@ -13,6 +13,9 @@
 # all adjacent == elements have been reduced to a single element,
 # so [1, 2, 2, 3] returns [1, 2, 3]. You may create a new list or
 # modify the passed in list.
+from heapq import merge
+
+
 def remove_adjacent(nums):
     if not nums:
         return []
@@ -31,6 +34,7 @@ def remove_adjacent(nums):
 # Ideally, the solution should work in "linear" time, making a single
 # pass of both lists.
 def linear_merge(list1, list2):
+    """Here I'm trying to be fast"""
     l1_idx, l2_idx = len(list1), len(list2)
     totalsize = l1_idx + l2_idx
     result_idx = totalsize - 1
@@ -46,6 +50,11 @@ def linear_merge(list1, list2):
             result[result_idx] = l2
         result_idx -= 1
     return result
+
+
+def linear_merge(list1, list2):
+    """And here I'm trying to be pythonic"""
+    return list(merge(list1, list2))
 
 
 # Note: the solution above is kind of cute, but unforunately list.pop(0)
